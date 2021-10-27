@@ -2,100 +2,101 @@
 	<head>
 		
 		<script id='sap-ui-bootstrap' 
-		  type='text/javascript' 
-		  src='https://sapui5.hana.ondemand.com/resources/sap-ui-core.js' 
-		  data-sap-ui-libs="sap.m, sap.viz" 
-		  data-sap-ui-theme="sap_fiori_3_dark"
-		  data-sap-ui-bindingSyntax="complex"
-		  data-sap-ui-compatVersion="edge" 
-		  >
+			type='text/javascript' 
+			src='https://sapui5.hana.ondemand.com/resources/sap-ui-core.js' 
+			data-sap-ui-libs="sap.m, sap.viz" 
+			data-sap-ui-theme="sap_fiori_3_dark"
+			data-sap-ui-bindingSyntax="complex"
+			data-sap-ui-compatVersion="edge" 
+		>
 		</script>
-		<script src='mainController.js'></script>
 		<script id="myXml" type="text/xmldata">
 			<mvc:View 
 			xmlns:core="sap.ui.core" 
-		    xmlns:mvc="sap.ui.core.mvc"
-		    xmlns:viz="sap.viz.ui5.controls"
-		    xmlns:layout="sap.ui.layout"
-		    xmlns="sap.m" 
-		    controllerName="myController" 
-		    displayBlock="true">
-		      <App>
-			 			<Page id="idPage" title="Precios electricidad por hora"
-							class= "sapUiResponsivePadding--header" >
-							<headerContent>
-								<Button icon="sap-icon://zoom-in" press='onChangeZoom("in")' />
-			      		<Button icon="sap-icon://zoom-out" press='onChangeZoom("out")' />
-								<ToggleButton icon="sap-icon://status-negative" tooltip="Tema claro" press='onChangeTheme' />
-							</headerContent>
-			 				<content>
-			   				<VBox>
-									<HBox>
-										<GenericTile 
-											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-											header="Precio actual"
-											frameType = "OneByHalf" 
-											subheader="{kpis>/actual/hour}" 
-										>
-											<TileContent unit="{kpis>/actual/currency}">
-												<NumericContent value="{kpis>/actual/price}" 
-													valueColor="{kpis>/actual/category}" 
-													indicator="{kpis>/actual/indicator}"
-													withMargin="false" />
-											</TileContent>
-										</GenericTile>
+			xmlns:mvc="sap.ui.core.mvc"
+			xmlns:viz="sap.viz.ui5.controls"
+			xmlns:layout="sap.ui.layout"
+			xmlns="sap.m" 
+			controllerName="myController" 
+			displayBlock="true">
+			
+			<App>
+				<Page id="idPage" title="Precios electricidad por hora"
+					class= "sapUiResponsivePadding--header" >
+						<headerContent>
+							<Button icon="sap-icon://zoom-in" press='onChangeZoom("in")' />
+							<Button icon="sap-icon://zoom-out" press='onChangeZoom("out")' />
+							<ToggleButton icon="sap-icon://status-negative" tooltip="Tema claro" press='onChangeTheme' />
+						</headerContent>
+						<content>
+							<VBox>
+								<HBox>
+									<GenericTile 
+										class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+										header="Precio actual"
+										frameType = "OneByHalf" 
+										subheader="{kpis>/actual/hour}">
+										
+										<TileContent unit="{kpis>/actual/currency}">
+											<NumericContent value="{kpis>/actual/price}" 
+												valueColor="{kpis>/actual/category}" 
+												indicator="{kpis>/actual/indicator}"
+												withMargin="false" />
+										</TileContent>
+									</GenericTile>
 
-										<GenericTile 
-											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-											header="Precio mínimo (dia)"
-											frameType = "OneByHalf" 
-											subheader="{kpis>/min/hour}" 
-										>
-											<TileContent unit="{kpis>/min/currency}">
-												<NumericContent value="{kpis>/min/price}"
-													valueColor="{kpis>/min/category}"
-													indicator="{kpis>/min/indicator}" withMargin="false" />
-											</TileContent>
-										</GenericTile>
+									<GenericTile 
+										class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+										header="Precio mínimo (dia)"
+										frameType = "OneByHalf" 
+										subheader="{kpis>/min/hour}">
+										
+										<TileContent unit="{kpis>/min/currency}">
+											<NumericContent value="{kpis>/min/price}"
+												valueColor="{kpis>/min/category}"
+												indicator="{kpis>/min/indicator}" withMargin="false" />
+										</TileContent>
+									</GenericTile>
 
-										<GenericTile 
-											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-											header="Precio medio (dia)"
-											frameType = "OneByHalf" 
-											subheader="{kpis>/average/day}" 
-										>
-											<TileContent unit="{kpis>/average/currency}">
-				 								<NumericContent value="{kpis>/average/price}"  
-				  								indicator="{kpis>/average/indicator}" withMargin="false" />
-											</TileContent>			
-										</GenericTile>
+									<GenericTile 
+										class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+										header="Precio medio (dia)"
+										frameType = "OneByHalf" 
+										subheader="{kpis>/average/day}">
+										
+										<TileContent unit="{kpis>/average/currency}">
+											<NumericContent value="{kpis>/average/price}"  
+											indicator="{kpis>/average/indicator}" withMargin="false" />
+										</TileContent>			
+									</GenericTile>
 
-										<GenericTile 
-											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-											header="Precio máximo (dia)"
-											frameType = "OneByHalf" 
-											subheader="{kpis>/max/hour}"
-										>
-											<TileContent unit="{kpis>/max/currency}">
-													<NumericContent value="{kpis>/max/price}"
-														valueColor="{kpis>/max/category}"
-														indicator="{kpis>/max/indicator}" withMargin="false" />
-											</TileContent>
+									<GenericTile 
+										class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+										header="Precio máximo (dia)"
+										frameType = "OneByHalf" 
+										subheader="{kpis>/max/hour}">
+										
+										<TileContent unit="{kpis>/max/currency}">
+												<NumericContent value="{kpis>/max/price}"
+													valueColor="{kpis>/max/category}"
+													indicator="{kpis>/max/indicator}" withMargin="false" />
+										</TileContent>
 
-										</GenericTile>
-			     				</HBox>
+									</GenericTile>
+								</HBox>
 
-									<viz:Popover id="idPopOver"></viz:Popover>
-									<viz:VizFrame id="idVizFrameBar" uiConfig="{applicationSet:'fiori'}" vizType='bar' width="100%"></viz:VizFrame>
+								<viz:Popover id="idPopOver"></viz:Popover>
+								<viz:VizFrame id="idVizFrameBar" uiConfig="{applicationSet:'fiori'}" vizType='bar' width="100%"></viz:VizFrame>
 
-			   				</VBox>
-							</content>
-			 			</Page>
-		      </App>
-		   </mvc:View>
+							</VBox>
+						</content>
+					</Page>
+				</App>
+			</mvc:View>
 		</script>
+    <script src='mainController.js'></script>
 	</head>
 	<body class='sapUiBody'>
-	   <div id='content'></div>
+		<div id='content'></div>
 	</body>
-</hmtl>
+</html>

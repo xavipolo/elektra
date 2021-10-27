@@ -1,4 +1,4 @@
-sap.ui.controller("myController", {
+sap.ui.controller("mainController", {
 
 	onInit: function() {
 

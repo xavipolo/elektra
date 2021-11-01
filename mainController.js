@@ -322,12 +322,17 @@ sap.ui.controller("mainController", {
 		
 		var oView = this.getView();
 		var num_hours = Math.ceil(parseFloat(oView.byId("num_hours").getValue()));
+		console.debug('*******************************************');
+		console.debug('num_hours = '+num_hours);
+		console.debug('jsonData.length = '+jsonData.length);
 
 		if (num_hours > 0 && num_hours < 24){
 			
-			let min_price_h1, min_price_h2, min_hour;
+			let min_price_h1, min_price_h2, min_price, price;
 			
 			for (let c=0; c<jsonData.length; c++){
+
+				console.debug('* c = '+c);
 				
 				if (jsonData.length - c < num_hours) {
 					console.debug('no quedan horas')
@@ -335,6 +340,8 @@ sap.ui.controller("mainController", {
 				}
 				
 				for (let c2=c ; c2 < (c+num_hours); c2++) {
+					console.debug('c2 = '+c2);
+					console.debug('c2 price = '+jsonData[c2].price);
 					if (c2==c) price = 0;
 					price += jsonData[c2].price;
 				}
@@ -344,14 +351,17 @@ sap.ui.controller("mainController", {
 				if (c == 0 || price < min_price){
 					min_price = price;
 					min_price_h1 = c;
-					min_price_h2 = c + num_hours;
+					min_price_h2 = c + num_hours-1;
 				}
 			
 			}
 			
-			oView.byId("res_hours").setText(min_price_h1 + " a " + min_price_h2 + " con precio medio de " + min_price);
+			oView.byId("res_hours").setText(min_price_h1 + ":00 a " + min_price_h2 + ":59 con precio medio de " + min_price);
 		
 		
+		}
+		else {
+			oView.byId("res_hours").setText('');
 		}
 		
 	}

@@ -119,24 +119,23 @@ sap.ui.controller("mainController", {
 
 	onDataLoad: function(oEvent) {
 
-		console.log('onDataLoad()');
+		console.debug('onDataLoad()');
 		
 		const colors = {
-			high: '#FF6600',
+			high: '#ee9b00',//'#FF6600',
 			medium: '#88c4d4',
-			low: '#a5d46a'
+			low: '#a5d46a',
+
+			highRef: '#ca6702',// '#ad1f2d',
+			mediumRef: '#457b9d', //'#FF9300',
+			lowRef: '#198754'
+
 		};
+		this.colors = colors;
 
 		var oVizFrame = this.getView().byId("idVizFrameBar");
-		console.log(oVizFrame.getModel('day'));
-		console.log(oVizFrame.getModel('day').getData());
-
 		var jsonData = oVizFrame.getModel('day').getData();
-
-		//var oPage = this.getView().byId("idPage");
 		const data_date = jsonData[0].day;
-		//oVizFrame.setTitle('Precios para ' + data_date);
-
 
 		var min_value = Math.min.apply(Math, jsonData.map(function(o) {
 			return o.price;
@@ -277,9 +276,9 @@ sap.ui.controller("mainController", {
 							label: {
 								text: "Min",
 								visible: true,
-								background: '#198754',
+								background: colors.lowRef,
 							},
-							color: '#198754'
+							color: colors.lowRef
 
 						}, {
 							value: mid_value,
@@ -287,18 +286,18 @@ sap.ui.controller("mainController", {
 							label: {
 								text: "Med",
 								visible: true,
-								background: '#FF9300'
+								background: colors.mediumRef
 							},
-							color: '#FF9300'
+							color: colors.mediumRef
 						}, {
 							value: high_value,
 							visible: true,
 							label: {
 								text: "High",
 								visible: true,
-								background: "#ad1f2d"
+								background: colors.highRef
 							},
-							color: '#ad1f2d'
+							color: colors.highRef
 						}]
 					}
 				},
@@ -313,7 +312,51 @@ sap.ui.controller("mainController", {
 
 		oVizFrame.setBusy(false);
 
+	},
+	
+	onPressCalculate: function(oEvent){
+	
+		var oVizFrame = this.getView().byId("idVizFrameBar");
+		var jsonData = oVizFrame.getModel('day').getData();
+		console.debug('onPressCalculate');
+		
+		var oView = this.getView();
+		var num_hours = Math.ceil(parseFloat(oView.byId("num_hours").getValue()));
+
+		if (num_hours > 0 && num_hours < 24){
+			
+			let min_price_h1, min_price_h2, min_hour;
+			
+			for (let c=0; c<jsonData.length; c++){
+				
+				if (jsonData.length - c < num_hours) {
+					console.debug('no quedan horas')
+					break;
+				}
+				
+				for (let c2=c ; c2 < (c+num_hours); c2++) {
+					if (c2==c) price = 0;
+					price += jsonData[c2].price;
+				}
+				
+				price = (price / num_hours).toFixed(3);
+				
+				if (c == 0 || price < min_price){
+					min_price = price;
+					min_price_h1 = c;
+					min_price_h2 = c + num_hours;
+				}
+			
+			}
+			
+			oView.byId("res_hours").setText(min_price_h1 + " a " + min_price_h2 + " con precio medio de " + min_price);
+		
+		
+		}
+		
 	}
+
+
 
 });
 

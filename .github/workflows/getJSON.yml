@@ -9,4 +9,6 @@ jobs:
         with:
           ENDPOINT: https://opendata.aragon.es/GA_OD_Core/download?resource_id=2181&formato=json
           CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json", "Content-Type": "application/json", "Host": "opendata.aragon.es"} }'
+          SAVE_LOCATION: public
+          BRANCH: master
         

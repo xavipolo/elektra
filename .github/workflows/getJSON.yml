@@ -10,5 +10,11 @@ jobs:
           ENDPOINT: https://opendata.aragon.es/GA_OD_Core/download?resource_id=2181&formato=json
           CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json", "Content-Type": "application/json", "Host": "opendata.aragon.es"} }'
           SAVE_LOCATION: public
-          BRANCH: master
+          SAVE_NAME: data
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: public/data.json
+          commit-msg: Updated data 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
         

@@ -1,6 +1,6 @@
 name: Scheduled - Get JSON
 on:
-  push:
+  push
   #workflow_dispatch:
   #schedule:
   #  - cron:  '45 20 * * */1'
@@ -19,6 +19,13 @@ jobs:
         curl "https://api.esios.ree.es/indicators/1001" -H "Content-Type: application/json" -H "Accept: application/json; application/vnd.esios-api-v1+json" -H "Content-Type: application/json" -H "Host: api.esios.ree.es" -H "Cookie:" -H "Authorization: Token token='${{ secrets.API_TOKEN }}'" -o data.json
     - name: Commit and push changes
       run: |-
+        date > generated.txt
+        #git config user.name github-actions
+        #git config user.email "actions@users.noreply.github.com"
+        #git add .
+        #git commit -m "generated"
+        #git push
+        
         git diff
         git config user.name "Automated"
         git config user.email "actions@users.noreply.github.com"

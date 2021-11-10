@@ -1,0 +1,26 @@
+name: Refresh data
+on: [push]
+jobs:
+  refresh-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Fetch API Data
+        uses: JamesIves/fetch-api-data-action@1.0.19
+        with:
+          #ENDPOINT: https://api.esios.ree.es/indicators/1001
+          #CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json; application/vnd.esios-api-v1+json", "Content-Type": "application/json", "Host": "api.esios.ree.es", "Cookie":"", "Authorization": "Token token=\"${{ secrets.API_TOKEN }}\"" } }'
+          ENDPOINT: https://opendata.aragon.es/GA_OD_Core/download?resource_id=2181&formato=json
+          CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json", "Content-Type": "application/json", "Host": "opendata.aragon.es"} }'
+          
+        
+      - name: Build and Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: master # Pushes the updates to the master branch.
+          FOLDER: fetch-api-data-action # The location of the data.json file saved by the Fetch API Data action.
+          TARGET_FOLDER: data # Saves the data into the 'data' directory on the master branch.

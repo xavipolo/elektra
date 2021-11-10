@@ -1,0 +1,12 @@
+name: Get JSON
+on: [push]
+jobs:
+  refresh-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch API Data
+        uses: JamesIves/fetch-api-data-action@1.0.19
+        with:
+          ENDPOINT: https://opendata.aragon.es/GA_OD_Core/download?resource_id=2181&formato=json
+          CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json", "Content-Type": "application/json", "Host": "opendata.aragon.es"} }'
+        

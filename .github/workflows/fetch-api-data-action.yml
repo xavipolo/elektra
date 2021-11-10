@@ -7,7 +7,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          persist-credentials: false
+          persist-credentials: true
       - name: Fetch API Data
         uses: JamesIves/fetch-api-data-action@1.0.19
         with:
@@ -15,8 +15,6 @@ jobs:
           #CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json; application/vnd.esios-api-v1+json", "Content-Type": "application/json", "Host": "api.esios.ree.es", "Cookie":"", "Authorization": "Token token=\"${{ secrets.API_TOKEN }}\"" } }'
           ENDPOINT: https://opendata.aragon.es/GA_OD_Core/download?resource_id=2181&formato=json
           CONFIGURATION: '{ "method": "GET", "headers": {"Accept": "application/json", "Content-Type": "application/json", "Host": "opendata.aragon.es"} }'
-          
-        
       - name: Build and Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
